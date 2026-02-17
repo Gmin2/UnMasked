@@ -36,7 +36,7 @@ export default function Matches() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-brand-600 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -48,7 +48,7 @@ export default function Matches() {
         <button
           onClick={() => setActiveTab('discover')}
           className={`flex-1 py-3 rounded-[1.5rem] font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 z-10 ${
-            activeTab === 'discover' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-500 hover:bg-zinc-50'
+            activeTab === 'discover' ? 'bg-brand-600 text-white shadow-md' : 'text-zinc-500 hover:bg-zinc-50'
           }`}
         >
           <Layers size={14} /> DISCOVER
@@ -56,7 +56,7 @@ export default function Matches() {
         <button
           onClick={() => setActiveTab('connected')}
           className={`flex-1 py-3 rounded-[1.5rem] font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 z-10 ${
-            activeTab === 'connected' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-500 hover:bg-zinc-50'
+            activeTab === 'connected' ? 'bg-brand-600 text-white shadow-md' : 'text-zinc-500 hover:bg-zinc-50'
           }`}
         >
           <MessageSquare size={14} /> CONNECTED
@@ -114,7 +114,7 @@ export default function Matches() {
                       className="w-16 h-16 rounded-[1.2rem] object-cover bg-zinc-50"
                     />
                     <div className="absolute -bottom-1 -right-1 bg-white p-0.5 rounded-full">
-                      <div className="bg-blue-50 text-blue-600 text-[8px] font-bold px-1.5 py-0.5 rounded-full border border-blue-100">
+                      <div className="bg-brand-50 text-brand-600 text-[8px] font-bold px-1.5 py-0.5 rounded-full border border-brand-100">
                         {match.compatibilityScore}%
                       </div>
                     </div>
@@ -129,7 +129,7 @@ export default function Matches() {
                   </div>
                   <button
                     onClick={() => navigate(`/chat/${match.groupId || match.id}`)}
-                    className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-100 transition-colors"
+                    className="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center hover:bg-brand-100 transition-colors"
                   >
                     <MessageSquare size={20} />
                   </button>
@@ -204,15 +204,15 @@ function SwipeCard({ match, onSwipe, isTop }: SwipeCardProps) {
         {/* Like/Nope Overlays */}
         <motion.div
           style={{ opacity: likeOpacity }}
-          className="absolute top-8 left-8 border-4 border-green-400 rounded-xl px-4 py-2 rotate-[-15deg] pointer-events-none"
+          className="absolute top-8 left-8 border-4 border-success-400 rounded-xl px-4 py-2 rotate-[-15deg] pointer-events-none"
         >
-          <span className="text-green-400 font-bold text-4xl font-mono uppercase tracking-widest">LIKE</span>
+          <span className="text-success-400 font-bold text-4xl font-mono uppercase tracking-widest">LIKE</span>
         </motion.div>
         <motion.div
           style={{ opacity: nopeOpacity }}
-          className="absolute top-8 right-8 border-4 border-rose-500 rounded-xl px-4 py-2 rotate-[15deg] pointer-events-none"
+          className="absolute top-8 right-8 border-4 border-danger-500 rounded-xl px-4 py-2 rotate-[15deg] pointer-events-none"
         >
-          <span className="text-rose-500 font-bold text-4xl font-mono uppercase tracking-widest">NOPE</span>
+          <span className="text-danger-500 font-bold text-4xl font-mono uppercase tracking-widest">NOPE</span>
         </motion.div>
 
         {/* Content */}
@@ -237,7 +237,7 @@ function SwipeCard({ match, onSwipe, isTop }: SwipeCardProps) {
               e.stopPropagation()
               onSwipe('left', match.id)
             }}
-            className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-rose-500 shadow-lg hover:bg-rose-50 hover:scale-110 transition-all active:scale-95"
+            className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-danger-500 shadow-lg hover:bg-danger-50 hover:scale-110 transition-all active:scale-95"
           >
             <X size={28} strokeWidth={3} />
           </button>
@@ -246,7 +246,7 @@ function SwipeCard({ match, onSwipe, isTop }: SwipeCardProps) {
               e.stopPropagation()
               onSwipe('right', match.id)
             }}
-            className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-blue-500 hover:scale-110 transition-all active:scale-95"
+            className="w-16 h-16 bg-brand-600 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-brand-500 hover:scale-110 transition-all active:scale-95"
           >
             <Heart size={28} fill="currentColor" />
           </button>

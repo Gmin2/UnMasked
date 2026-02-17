@@ -15,6 +15,7 @@ interface ConfessionState {
   confessions: Record<string, Confession[]>
   loading: boolean
   fetchConfessions: (poolId: string, sdk: NovaSdk) => Promise<void>
+  addConfession: (poolId: string, text: string) => void
   addReaction: (confessionId: string, poolId: string, reaction: string) => void
 }
 
@@ -58,6 +59,23 @@ export const useConfessionStore = create<ConfessionState>((set, get) => ({
     } catch {
       set({ loading: false })
     }
+  },
+
+  addConfession: (poolId, text) => {
+    const newItem: Confession = {
+      id: `local-${Date.now()}`,
+      text,
+      timestamp: Date.now(),
+      poolId,
+      ipfsHash: `local-${Date.now()}`,
+      reactions: { '❤️': 0, '🔥': 0, '🤔': 0, '👻': 0 },
+    }
+    set((state) => ({
+      confessions: {
+        ...state.confessions,
+        [poolId]: [newItem, ...(state.confessions[poolId] || [])],
+      },
+    }))
   },
 
   addReaction: (confessionId, poolId, reaction) => {

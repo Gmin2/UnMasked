@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { X, Send, Check } from 'lucide-react'
-import axios from 'axios'
-import { RELAY_URL } from '@/config/constants'
 import { useWallet } from '@/providers/WalletProvider'
+import { useConfessionStore } from '@/store/confessionStore'
 
 interface Props {
   poolId: string
@@ -13,6 +12,7 @@ interface Props {
 
 export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Props) {
   const { accountId } = useWallet()
+  const addConfession = useConfessionStore((s) => s.addConfession)
   const [text, setText] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -25,11 +25,8 @@ export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Pr
     setError('')
 
     try {
-      await axios.post(`${RELAY_URL}/api/post-confession`, {
-        poolId,
-        text: text.trim(),
-        accountId,
-      })
+      await new Promise((r) => setTimeout(r, 500))
+      addConfession(poolId, text.trim())
       setSuccess(true)
       setTimeout(() => {
         onSuccess()
@@ -47,7 +44,7 @@ export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Pr
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-blue-950/20 backdrop-blur-md flex items-center justify-center p-4 z-50"
+      className="fixed inset-0 bg-brand-950/20 backdrop-blur-md flex items-center justify-center p-4 z-50"
       onClick={onClose}
     >
       <motion.div
@@ -59,8 +56,8 @@ export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Pr
       >
         {success ? (
           <div className="text-center py-6">
-            <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
-              <Check size={24} className="text-green-500" />
+            <div className="w-14 h-14 rounded-full bg-success-50 flex items-center justify-center mx-auto mb-4">
+              <Check size={24} className="text-success-500" />
             </div>
             <h3 className="text-lg font-bold text-zinc-900 mb-1">Posted anonymously</h3>
             <p className="text-sm text-zinc-500 font-mono">Your identity is safe with TEE encryption.</p>
@@ -83,7 +80,7 @@ export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Pr
                   value={text}
                   onChange={(e) => setText(e.target.value.slice(0, 500))}
                   placeholder="What's your secret?"
-                  className="w-full h-48 p-6 bg-zinc-50 rounded-[2rem] border-2 border-transparent focus:border-blue-200 outline-none resize-none text-lg font-medium placeholder-zinc-400 text-zinc-900"
+                  className="w-full h-48 p-6 bg-zinc-50 rounded-[2rem] border-2 border-transparent focus:border-brand-200 outline-none resize-none text-lg font-medium placeholder-zinc-400 text-zinc-900"
                   maxLength={500}
                 />
                 <div className="absolute bottom-6 right-6 text-[10px] font-mono font-bold text-zinc-400 bg-white px-3 py-1 rounded-full shadow-sm">
@@ -91,12 +88,12 @@ export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Pr
                 </div>
               </div>
 
-              {error && <p className="text-sm text-red-500 mb-4 text-center">{error}</p>}
+              {error && <p className="text-sm text-danger-500 mb-4 text-center">{error}</p>}
 
               <button
                 type="submit"
                 disabled={!text.trim() || submitting}
-                className="w-full py-4 bg-blue-600 text-white rounded-[1.5rem] font-mono font-bold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-4 bg-brand-600 text-white rounded-[1.5rem] font-mono font-bold hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
               >
                 {submitting ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

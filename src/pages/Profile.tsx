@@ -81,14 +81,14 @@ export default function Profile() {
           <img
             src={avatarUrl}
             alt="Profile"
-            className="w-32 h-32 rounded-[2rem] border-4 border-blue-50 object-cover shadow-inner bg-gray-100"
+            className="w-32 h-32 rounded-[2rem] border-4 border-brand-50 object-cover shadow-inner bg-gray-100"
           />
           <button className="absolute -bottom-2 -right-2 w-10 h-10 bg-white border border-zinc-100 text-zinc-900 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-sm">
             <Camera size={16} />
           </button>
         </div>
         <h1 className="text-2xl font-bold mb-1 text-zinc-900">{displayName}</h1>
-        <div className="inline-block px-3 py-1 bg-blue-50 rounded-full text-[10px] font-mono font-bold text-blue-700 border border-blue-100">
+        <div className="inline-block px-3 py-1 bg-brand-50 rounded-full text-[10px] font-mono font-bold text-brand-700 border border-brand-100">
           ID: {accountId.slice(0, 16)}
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function Profile() {
               value={profile.name}
               onChange={(e) => setProfile({ ...profile, name: e.target.value })}
               placeholder="Anonymous"
-              className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-bold text-zinc-900 border-2 border-transparent focus:border-blue-200 outline-none transition-colors"
+              className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-bold text-zinc-900 border-2 border-transparent focus:border-brand-200 outline-none transition-colors"
             />
           </div>
           <div>
@@ -117,7 +117,7 @@ export default function Profile() {
               value={profile.description}
               onChange={(e) => setProfile({ ...profile, description: e.target.value })}
               placeholder="Tell the world about yourself..."
-              className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-medium text-zinc-900 border-2 border-transparent focus:border-blue-200 outline-none transition-colors resize-none h-32"
+              className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-medium text-zinc-900 border-2 border-transparent focus:border-brand-200 outline-none transition-colors resize-none h-32"
             />
           </div>
           <div>
@@ -127,17 +127,17 @@ export default function Profile() {
               value={profile.imageUrl}
               onChange={(e) => setProfile({ ...profile, imageUrl: e.target.value })}
               placeholder="https://..."
-              className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-medium text-zinc-900 border-2 border-transparent focus:border-blue-200 outline-none transition-colors"
+              className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-medium text-zinc-900 border-2 border-transparent focus:border-brand-200 outline-none transition-colors"
             />
           </div>
         </div>
 
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {error && <p className="text-sm text-danger-500">{error}</p>}
 
         <button
           onClick={handleSave}
           disabled={saving}
-          className="w-full py-4 bg-blue-600 text-white border border-blue-600 rounded-[1.5rem] font-mono font-bold text-sm hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-4 bg-brand-600 text-white border border-brand-600 rounded-[1.5rem] font-mono font-bold text-sm hover:bg-brand-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {saving ? (
             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

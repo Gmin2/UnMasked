@@ -47,13 +47,13 @@ export default function Layout({ children }: LayoutProps) {
   const NavContent = () => (
     <div className="flex flex-col h-full bg-white rounded-[2rem] p-6 shadow-sm border border-zinc-100">
       <div className="flex items-center gap-4 mb-8 pl-2">
-        <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
+        <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center">
           <Ghost size={24} strokeWidth={2.5} />
         </div>
         <div>
           <h1 className="font-mono font-bold text-lg leading-tight text-zinc-900">NearClaw</h1>
           <div className="flex items-center gap-2 mt-1">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="w-2 h-2 bg-success-500 rounded-full animate-pulse"></span>
             <span className="text-xs font-mono text-zinc-400">ONLINE</span>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function Layout({ children }: LayoutProps) {
               onClick={() => setIsMobileMenuOpen(false)}
               className={`flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-300 group ${
                 isActive
-                  ? 'bg-blue-50 text-blue-600 font-bold'
+                  ? 'bg-brand-50 text-brand-600 font-bold'
                   : 'text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900'
               }`}
             >
@@ -81,7 +81,7 @@ export default function Layout({ children }: LayoutProps) {
               {item.count && (
                 <span
                   className={`text-[10px] font-mono font-bold px-2 py-1 rounded-full ${
-                    isActive ? 'bg-white text-blue-600 shadow-sm' : 'bg-zinc-100 text-zinc-400'
+                    isActive ? 'bg-white text-brand-600 shadow-sm' : 'bg-zinc-100 text-zinc-400'
                   }`}
                 >
                   {item.count}
@@ -100,7 +100,7 @@ export default function Layout({ children }: LayoutProps) {
               alt="Profile"
               className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm bg-gray-100"
             />
-            <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+            <span className="absolute bottom-0 right-0 w-3 h-3 bg-success-500 border-2 border-white rounded-full"></span>
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-mono text-sm font-bold truncate text-zinc-900">{displayName}</p>
@@ -111,7 +111,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
         <button
           onClick={signOut}
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold text-zinc-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors"
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono font-bold text-zinc-400 hover:text-danger-500 hover:bg-danger-50 rounded-xl transition-colors"
         >
           <LogOut size={16} />
           DISCONNECT
@@ -130,7 +130,7 @@ export default function Layout({ children }: LayoutProps) {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-zinc-100 h-16 flex items-center justify-between px-4 z-30">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+          <div className="w-8 h-8 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center">
             <Ghost size={16} />
           </div>
           <span className="font-mono font-bold text-zinc-900">NearClaw</span>

@@ -8,8 +8,6 @@ import { CONFESSION_POOLS } from '@/config/constants'
 import { useNova } from '@/providers/NovaProvider'
 import { useWallet } from '@/providers/WalletProvider'
 import { useConfessionStore } from '@/store/confessionStore'
-import axios from 'axios'
-import { RELAY_URL } from '@/config/constants'
 
 export default function PoolDetail() {
   const { poolId } = useParams<{ poolId: string }>()
@@ -40,11 +38,10 @@ export default function PoolDetail() {
     setJoining(true)
     setJoinError('')
     try {
-      await axios.post(`${RELAY_URL}/api/join-pool`, { poolId: pool.id, accountId })
+      await new Promise((r) => setTimeout(r, 400))
       setIsMember(true)
-    } catch (err) {
-      console.error('Join pool failed:', err)
-      setJoinError('Failed to join pool. Make sure the relay server is running on port 3001.')
+    } catch {
+      setJoinError('Failed to join pool.')
     } finally {
       setJoining(false)
     }
@@ -54,7 +51,7 @@ export default function PoolDetail() {
     return (
       <div className="text-center py-20 font-mono text-zinc-400">
         POOL_NOT_FOUND
-        <button onClick={() => navigate('/confessions')} className="block mx-auto mt-4 text-sm text-blue-600 underline">
+        <button onClick={() => navigate('/confessions')} className="block mx-auto mt-4 text-sm text-brand-600 underline">
           Back to pools
         </button>
       </div>
@@ -80,7 +77,7 @@ export default function PoolDetail() {
           <button
             onClick={handleJoin}
             disabled={joining}
-            className="px-5 py-2.5 bg-blue-600 text-white font-mono font-bold text-xs rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="px-5 py-2.5 bg-brand-600 text-white font-mono font-bold text-xs rounded-full hover:bg-brand-700 transition-colors disabled:opacity-50"
           >
             {joining ? 'JOINING...' : 'JOIN'}
           </button>
@@ -88,7 +85,7 @@ export default function PoolDetail() {
       </div>
 
       {joinError && (
-        <p className="text-sm text-red-500 text-center">{joinError}</p>
+        <p className="text-sm text-danger-500 text-center">{joinError}</p>
       )}
 
       {/* Feed */}
@@ -100,7 +97,7 @@ export default function PoolDetail() {
         </div>
       ) : loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-brand-600 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : confessions && confessions.length > 0 ? (
         <div className="space-y-4">
@@ -119,7 +116,7 @@ export default function PoolDetail() {
       {isMember && (
         <button
           onClick={() => setShowModal(true)}
-          className="fixed bottom-8 right-8 w-16 h-16 bg-blue-600 text-white border border-blue-500 rounded-[1.5rem] shadow-lg shadow-blue-200 flex items-center justify-center hover:scale-105 transition-transform z-20"
+          className="fixed bottom-8 right-8 w-16 h-16 bg-brand-600 text-white border border-brand-500 rounded-[1.5rem] shadow-lg shadow-brand-200 flex items-center justify-center hover:scale-105 transition-transform z-20"
         >
           <PenTool size={24} />
         </button>

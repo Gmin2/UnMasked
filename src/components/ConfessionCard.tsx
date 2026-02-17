@@ -3,9 +3,9 @@ import type { Confession } from '@/store/confessionStore'
 import { useConfessionStore } from '@/store/confessionStore'
 
 const reactionConfig = [
-  { key: '❤️', icon: Heart, activeColor: 'hover:bg-rose-50 hover:text-rose-500' },
-  { key: '🔥', icon: Flame, activeColor: 'hover:bg-orange-50 hover:text-orange-500' },
-  { key: '🤔', icon: HelpCircle, activeColor: 'hover:bg-blue-50 hover:text-blue-500' },
+  { key: '❤️', icon: Heart, activeColor: 'hover:bg-danger-50 hover:text-danger-500' },
+  { key: '🔥', icon: Flame, activeColor: 'hover:bg-warn-50 hover:text-warn-500' },
+  { key: '🤔', icon: HelpCircle, activeColor: 'hover:bg-brand-50 hover:text-brand-500' },
 ] as const
 
 export default function ConfessionCard({ confession }: { confession: Confession }) {
@@ -15,7 +15,7 @@ export default function ConfessionCard({ confession }: { confession: Confession 
   return (
     <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-zinc-100">
       <div className="flex items-center gap-2 mb-6">
-        <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center text-blue-400">
+        <div className="w-8 h-8 bg-brand-50 rounded-full flex items-center justify-center text-brand-400">
           <Ghost size={14} />
         </div>
         <span className="text-xs font-mono font-bold text-zinc-400">{timeAgo}</span>

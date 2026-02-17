@@ -65,7 +65,7 @@ export default function DataSovereignty() {
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Header */}
       <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-zinc-100">
-        <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+        <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mb-6">
           <HardDrive size={24} />
         </div>
         <h1 className="text-3xl font-bold mb-4 text-zinc-900">
@@ -81,7 +81,7 @@ export default function DataSovereignty() {
         {/* Export Card */}
         <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-zinc-100 flex flex-col justify-between h-64 group hover:shadow-md transition-shadow">
           <div>
-            <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mb-4 text-blue-600">
+            <div className="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center mb-4 text-brand-600">
               <FileJson size={20} />
             </div>
             <h3 className="text-lg font-bold mb-2 text-zinc-900">Export JSON</h3>
@@ -91,32 +91,32 @@ export default function DataSovereignty() {
           </div>
           <button
             onClick={handleExport}
-            className="w-full py-3 border-2 border-blue-50 bg-blue-50 rounded-full font-mono font-bold text-xs text-blue-700 hover:bg-blue-100 transition-colors"
+            className="w-full py-3 border-2 border-brand-50 bg-brand-50 rounded-full font-mono font-bold text-xs text-brand-700 hover:bg-brand-100 transition-colors"
           >
             DOWNLOAD
           </button>
         </div>
 
         {/* Delete Card */}
-        <div className="bg-rose-50 p-6 rounded-[2.5rem] border-2 border-transparent hover:border-rose-100 flex flex-col justify-between h-64 transition-colors">
+        <div className="bg-danger-50 p-6 rounded-[2.5rem] border-2 border-transparent hover:border-danger-100 flex flex-col justify-between h-64 transition-colors">
           <div>
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-4 text-rose-500">
+            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-4 text-danger-500">
               <Trash2 size={20} />
             </div>
-            <h3 className="text-lg font-bold text-rose-900 mb-2">Nuclear Option</h3>
-            <p className="text-xs text-rose-700/60 font-mono leading-relaxed">
+            <h3 className="text-lg font-bold text-danger-900 mb-2">Nuclear Option</h3>
+            <p className="text-xs text-danger-700/60 font-mono leading-relaxed">
               Permanently burn your identity from the protocol.
             </p>
           </div>
           {deleted ? (
-            <div className="w-full py-3 text-center font-mono font-bold text-xs text-green-600">
+            <div className="w-full py-3 text-center font-mono font-bold text-xs text-success-600">
               DELETED
             </div>
           ) : (
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="w-full py-3 bg-rose-200 text-rose-900 rounded-full font-mono font-bold text-xs hover:bg-rose-300 transition-colors shadow-sm disabled:opacity-50"
+              className="w-full py-3 bg-danger-200 text-danger-900 rounded-full font-mono font-bold text-xs hover:bg-danger-300 transition-colors shadow-sm disabled:opacity-50"
             >
               {deleting ? 'DELETING...' : 'DELETE_ACCOUNT'}
             </button>

@@ -43,8 +43,8 @@ export default function Matching() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="bg-white p-12 rounded-[2.5rem] shadow-sm border border-zinc-100 text-center max-w-md">
-          <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
-            <Check size={28} className="text-green-500" />
+          <div className="w-16 h-16 rounded-full bg-success-50 flex items-center justify-center mx-auto mb-5">
+            <Check size={28} className="text-success-500" />
           </div>
           <h2 className="text-2xl font-bold text-zinc-900 mb-2">Preferences Encrypted</h2>
           <p className="text-zinc-500 font-mono text-xs mb-4">
@@ -52,7 +52,7 @@ export default function Matching() {
           </p>
           <button
             onClick={() => navigate('/matches')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-full font-mono font-bold text-xs hover:bg-blue-700 transition-colors"
+            className="px-6 py-3 bg-brand-600 text-white rounded-full font-mono font-bold text-xs hover:bg-brand-700 transition-colors"
           >
             VIEW_MATCHES
           </button>
@@ -64,7 +64,7 @@ export default function Matching() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="bg-white p-8 rounded-[2.5rem] text-center shadow-sm border border-zinc-100">
-        <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-blue-600">
+        <div className="w-12 h-12 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-brand-600">
           <Filter size={24} />
         </div>
         <h1 className="text-3xl font-bold mb-2 text-zinc-900">Discovery</h1>
@@ -86,7 +86,7 @@ export default function Matching() {
                 onClick={() => toggleSelection(item, interests, setInterests)}
                 className={`px-5 py-3 rounded-full text-sm font-bold transition-all border ${
                   interests.includes(item)
-                    ? 'bg-blue-50 text-blue-700 border-blue-200'
+                    ? 'bg-brand-50 text-brand-700 border-brand-200'
                     : 'bg-white text-zinc-500 border-zinc-100 hover:border-zinc-200'
                 }`}
               >
@@ -110,7 +110,7 @@ export default function Matching() {
                 onClick={() => toggleSelection(item, values, setValues)}
                 className={`px-5 py-3 rounded-full text-sm font-bold transition-all border ${
                   values.includes(item)
-                    ? 'bg-blue-50 text-blue-700 border-blue-200'
+                    ? 'bg-brand-50 text-brand-700 border-brand-200'
                     : 'bg-white text-zinc-500 border-zinc-100 hover:border-zinc-200'
                 }`}
               >
@@ -126,7 +126,7 @@ export default function Matching() {
         <div className="p-8 pb-4">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-sm font-mono font-bold text-zinc-400">AGE_RANGE</h2>
-            <span className="text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold text-brand-700 bg-brand-50 px-3 py-1 rounded-full">
               {ageMin} - {ageMax}
             </span>
           </div>
@@ -137,7 +137,7 @@ export default function Matching() {
               onChange={(e) => setAgeMin(Number(e.target.value))}
               min={18}
               max={99}
-              className="w-20 px-4 py-3 bg-zinc-50 rounded-xl text-center font-bold text-zinc-900 border-2 border-transparent focus:border-blue-200 outline-none"
+              className="w-20 px-4 py-3 bg-zinc-50 rounded-xl text-center font-bold text-zinc-900 border-2 border-transparent focus:border-brand-200 outline-none"
             />
             <span className="text-zinc-400">—</span>
             <input
@@ -146,7 +146,7 @@ export default function Matching() {
               onChange={(e) => setAgeMax(Number(e.target.value))}
               min={18}
               max={99}
-              className="w-20 px-4 py-3 bg-zinc-50 rounded-xl text-center font-bold text-zinc-900 border-2 border-transparent focus:border-blue-200 outline-none"
+              className="w-20 px-4 py-3 bg-zinc-50 rounded-xl text-center font-bold text-zinc-900 border-2 border-transparent focus:border-brand-200 outline-none"
             />
           </div>
         </div>
@@ -160,7 +160,7 @@ export default function Matching() {
             value={dealBreakers}
             onChange={(e) => setDealBreakers(e.target.value)}
             placeholder="Anything that's a hard no..."
-            className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-medium text-zinc-900 border-2 border-transparent focus:border-blue-200 outline-none resize-none h-24 placeholder-zinc-400"
+            className="w-full px-6 py-4 bg-zinc-50 rounded-[1.5rem] font-medium text-zinc-900 border-2 border-transparent focus:border-brand-200 outline-none resize-none h-24 placeholder-zinc-400"
           />
         </div>
 
@@ -169,7 +169,7 @@ export default function Matching() {
           <button
             onClick={handleSubmit}
             disabled={loading || interests.length === 0}
-            className="w-full py-5 bg-blue-600 text-white font-mono font-bold text-sm rounded-[2rem] hover:bg-blue-700 transition-all border border-blue-600 shadow-sm shadow-blue-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-5 bg-brand-600 text-white font-mono font-bold text-sm rounded-[2rem] hover:bg-brand-700 transition-all border border-brand-600 shadow-sm shadow-brand-100 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto" />

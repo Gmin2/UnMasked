@@ -100,11 +100,11 @@ export default function Chat() {
                 alt="Avatar"
                 className="w-10 h-10 rounded-full object-cover bg-gray-100"
               />
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-success-500 border-2 border-white rounded-full"></span>
             </div>
             <div>
               <h2 className="text-sm font-bold text-zinc-900">Match #{matchId?.slice(0, 8)}</h2>
-              <div className="flex items-center gap-1 text-[10px] font-mono font-bold text-blue-400">
+              <div className="flex items-center gap-1 text-[10px] font-mono font-bold text-brand-400">
                 ENCRYPTED_CHANNEL
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function Chat() {
                 <div
                   className={`px-6 py-4 rounded-[1.5rem] text-sm font-medium leading-relaxed ${
                     isMine
-                      ? 'bg-blue-600 text-white rounded-br-none'
+                      ? 'bg-brand-600 text-white rounded-br-none'
                       : 'bg-white text-zinc-800 rounded-bl-none border border-zinc-100 shadow-sm'
                   }`}
                 >
@@ -169,7 +169,7 @@ export default function Chat() {
           <button
             type="submit"
             disabled={!input.trim() || sending}
-            className="p-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-transform active:scale-95"
+            className="p-4 bg-brand-600 text-white rounded-full hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed transition-transform active:scale-95"
           >
             {sending ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

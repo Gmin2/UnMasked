@@ -18,5 +18,3 @@ export const CONFESSION_POOLS: Record<string, { id: string; name: string; emoji:
   work: { id: 'nearclaw-work', name: 'Work Confessions', emoji: '💼', description: 'Office drama and career chaos' },
   general: { id: 'nearclaw-general', name: 'General', emoji: '💬', description: 'Anything goes, judgment-free zone' },
 }
-
-export const RELAY_URL = import.meta.env.VITE_RELAY_URL || 'http://localhost:3001'
