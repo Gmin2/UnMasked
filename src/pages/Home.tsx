@@ -1,10 +1,16 @@
+import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useWallet } from '@/providers/WalletProvider'
-import { ArrowRight, Ghost, Shield } from 'lucide-react'
+import { ArrowRight, Shield } from 'lucide-react'
+import logoImg from '@/assets/logo.png'
 
 export default function Home() {
   const { accountId, signIn } = useWallet()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (accountId) navigate('/confessions')
+  }, [accountId, navigate])
 
   const handleConnect = async () => {
     if (accountId) {
@@ -20,10 +26,8 @@ export default function Home() {
       <nav className="fixed w-full z-50 px-6 py-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="bg-white pl-2 pr-6 py-2 rounded-full shadow-sm flex items-center gap-3 border border-zinc-100">
-            <div className="w-8 h-8 bg-brand-50 rounded-full flex items-center justify-center text-brand-600">
-              <Ghost size={16} />
-            </div>
-            <span className="font-mono font-bold tracking-tight">NearClaw</span>
+            <img src={logoImg} alt="UnMasked" className="w-8 h-8 rounded-full" />
+            <span className="font-mono font-bold tracking-tight">UnMasked</span>
           </div>
           {accountId ? (
             <Link
@@ -53,12 +57,12 @@ export default function Home() {
                 TEE SECURED NETWORK
               </div>
               <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-8 text-zinc-900">
-                ANONYMOUS<br />
-                SOCIAL<br />
-                LAYER.
+                GET<br />
+                UNMASKED<br />
+                ANON.
               </h1>
               <p className="text-xl font-mono text-zinc-500 max-w-lg leading-relaxed">
-                The first decentralized platform where your identity is mathematically hidden. Confess, match, and chat inside the Enclave.
+                Anonymous confessions and confidential matchmaking on NEAR. Your identity stays hidden inside TEE enclaves.
               </p>
             </div>
 

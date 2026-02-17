@@ -1,13 +1,13 @@
-export const NETWORK_ID = 'testnet'
+export const NETWORK_ID = 'mainnet'
 
 export const NOVA_CONFIG = {
-  contractId: 'nova-sdk-6.testnet',
+  contractId: 'nova-sdk.near',
   mcpUrl: 'https://nova-mcp.fastmcp.app',
-  rpcUrl: 'https://rpc.testnet.near.org',
+  rpcUrl: 'https://free.rpc.fastnear.com',
 }
 
 export const SOCIAL_CONFIG = {
-  contractId: 'v1.social08.testnet',
+  contractId: 'social.near',
 }
 
 export const CONFESSION_POOLS: Record<string, { id: string; name: string; emoji: string; description: string }> = {

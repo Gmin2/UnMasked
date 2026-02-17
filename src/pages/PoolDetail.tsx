@@ -25,8 +25,8 @@ export default function PoolDetail() {
 
   useEffect(() => {
     if (!sdk || !pool) return
-    sdk.isAuthorized(pool.id).then(setIsMember).catch(() => setIsMember(false))
-  }, [sdk, pool])
+    sdk.isAuthorized(pool.id, accountId).then(setIsMember).catch(() => setIsMember(false))
+  }, [sdk, pool, accountId])
 
   useEffect(() => {
     if (!sdk || !pool || !isMember) return
@@ -34,13 +34,17 @@ export default function PoolDetail() {
   }, [sdk, pool, isMember, fetchConfessions])
 
   const handleJoin = async () => {
-    if (!accountId || !pool) return
+    if (!sdk || !accountId || !pool) return
     setJoining(true)
     setJoinError('')
     try {
-      await new Promise((r) => setTimeout(r, 400))
+      // Ensure group exists (ignore error if already registered or partial failure)
+      try { await sdk.registerGroup(pool.id) } catch (e) { console.warn('registerGroup:', e) }
+      // Add user as member
+      try { await sdk.addGroupMember(pool.id, accountId) } catch (e) { console.warn('addGroupMember:', e) }
       setIsMember(true)
-    } catch {
+    } catch (err) {
+      console.error('Join pool failed:', err)
       setJoinError('Failed to join pool.')
     } finally {
       setJoining(false)

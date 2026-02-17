@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Users, ArrowUpRight, MessageCircle, Sparkles } from 'lucide-react'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
 import { CONFESSION_POOLS } from '@/config/constants'
-import { useNova } from '@/providers/NovaProvider'
 
 // Bento grid config keyed by pool key (crypto, dating, etc.)
 const gridConfig: Record<string, {
@@ -81,30 +79,7 @@ const defaultConfig = {
 }
 
 export default function ConfessionFeed() {
-  const { sdk } = useNova()
   const navigate = useNavigate()
-  const [poolStats, setPoolStats] = useState<Record<string, { members: number; confessions: number }>>({})
-
-  useEffect(() => {
-    if (!sdk) return
-
-    const loadStats = async () => {
-      const stats: typeof poolStats = {}
-      for (const [key, pool] of Object.entries(CONFESSION_POOLS)) {
-        try {
-          const txns = await sdk.getTransactionsForGroup(pool.id)
-          stats[key] = { members: 0, confessions: txns.length }
-        } catch {
-          stats[key] = { members: 0, confessions: 0 }
-        }
-      }
-      setPoolStats(stats)
-    }
-    loadStats()
-  }, [sdk])
-
-  const totalSecrets = Object.values(poolStats).reduce((acc, s) => acc + s.confessions, 0)
-
   const poolEntries = Object.entries(CONFESSION_POOLS)
 
   return (
@@ -115,7 +90,7 @@ export default function ConfessionFeed() {
           <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-2 text-zinc-900">Confessions</h1>
           <div className="flex items-center gap-2 text-zinc-400 font-mono text-xs font-bold uppercase tracking-wider">
             <span className="w-2 h-2 bg-success-500 rounded-full animate-pulse"></span>
-            Live Feed &bull; {totalSecrets.toLocaleString()} Secrets
+            Live Feed
           </div>
         </div>
         <div className="hidden md:flex items-center gap-2">
@@ -132,9 +107,6 @@ export default function ConfessionFeed() {
       <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[240px] gap-4">
         {poolEntries.map(([key, pool]) => {
           const config = gridConfig[key] || defaultConfig
-          const stats = poolStats[key]
-          const memberCount = stats?.members ?? 0
-          const confessionCount = stats?.confessions ?? 0
 
           return (
             <div
@@ -168,17 +140,7 @@ export default function ConfessionFeed() {
                 <span className="text-[10px] font-mono font-bold mb-3 block tracking-widest opacity-60 uppercase">
                   {config.subtext}
                 </span>
-                <h3 className="text-3xl font-bold leading-none tracking-tight mb-4">{pool.name}</h3>
-                <div className="flex items-center gap-4 opacity-80">
-                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold">
-                    <Users size={14} />
-                    {memberCount < 1000 ? memberCount : `${(memberCount / 1000).toFixed(1)}k`}
-                  </div>
-                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold">
-                    <MessageCircle size={14} />
-                    {confessionCount < 1000 ? confessionCount : `${(confessionCount / 1000).toFixed(1)}k`}
-                  </div>
-                </div>
+                <h3 className="text-3xl font-bold leading-none tracking-tight">{pool.name}</h3>
               </div>
             </div>
           )

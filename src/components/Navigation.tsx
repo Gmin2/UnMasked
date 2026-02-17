@@ -10,17 +10,17 @@ import {
   Search,
   Menu,
   X,
-  Ghost,
 } from 'lucide-react'
+import logoImg from '@/assets/logo.png'
 
 const AVATAR_BASE_URL = 'https://api.dicebear.com/7.x/bottts/svg?seed='
 
 const navItems = [
-  { to: '/confessions', label: 'Confessions', icon: MessageSquare, count: '12' },
-  { to: '/matching', label: 'Discover', icon: Search, count: null },
-  { to: '/matches', label: 'Matches', icon: Heart, count: '3' },
-  { to: '/profile', label: 'Profile', icon: User, count: null },
-  { to: '/data', label: 'Sovereignty', icon: Database, count: null },
+  { to: '/confessions', label: 'Confessions', icon: MessageSquare },
+  { to: '/matching', label: 'Discover', icon: Search },
+  { to: '/matches', label: 'Matches', icon: Heart },
+  { to: '/profile', label: 'Profile', icon: User },
+  { to: '/data', label: 'Sovereignty', icon: Database },
 ]
 
 interface LayoutProps {
@@ -39,19 +39,17 @@ export default function Layout({ children }: LayoutProps) {
 
   const avatarSeed = accountId || 'anon'
   const displayName = accountId
-    ? accountId.length > 20
-      ? `${accountId.slice(0, 18)}...`
+    ? accountId.length > 14
+      ? `${accountId.slice(0, 12)}...`
       : accountId
     : 'Anonymous'
 
   const NavContent = () => (
     <div className="flex flex-col h-full bg-white rounded-[2rem] p-6 shadow-sm border border-zinc-100">
       <div className="flex items-center gap-4 mb-8 pl-2">
-        <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center">
-          <Ghost size={24} strokeWidth={2.5} />
-        </div>
+        <img src={logoImg} alt="UnMasked" className="w-12 h-12 rounded-2xl" />
         <div>
-          <h1 className="font-mono font-bold text-lg leading-tight text-zinc-900">NearClaw</h1>
+          <h1 className="font-mono font-bold text-lg leading-tight text-zinc-900">UnMasked</h1>
           <div className="flex items-center gap-2 mt-1">
             <span className="w-2 h-2 bg-success-500 rounded-full animate-pulse"></span>
             <span className="text-xs font-mono text-zinc-400">ONLINE</span>
@@ -78,15 +76,6 @@ export default function Layout({ children }: LayoutProps) {
                 <Icon size={20} strokeWidth={2} className="group-hover:scale-110 transition-transform" />
                 <span className="font-mono text-sm">{item.label}</span>
               </div>
-              {item.count && (
-                <span
-                  className={`text-[10px] font-mono font-bold px-2 py-1 rounded-full ${
-                    isActive ? 'bg-white text-brand-600 shadow-sm' : 'bg-zinc-100 text-zinc-400'
-                  }`}
-                >
-                  {item.count}
-                </span>
-              )}
             </Link>
           )
         })}
@@ -130,10 +119,8 @@ export default function Layout({ children }: LayoutProps) {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-zinc-100 h-16 flex items-center justify-between px-4 z-30">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center">
-            <Ghost size={16} />
-          </div>
-          <span className="font-mono font-bold text-zinc-900">NearClaw</span>
+          <img src={logoImg} alt="UnMasked" className="w-8 h-8 rounded-xl" />
+          <span className="font-mono font-bold text-zinc-900">UnMasked</span>
         </div>
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

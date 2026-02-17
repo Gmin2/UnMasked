@@ -55,7 +55,7 @@ const SEED_MESSAGES: Record<string, Array<{ id: string; text: string; sender: st
   ],
   'nearclaw-chat-anon-b8e6f1': [
     { id: 'm5', text: 'Matched! This anonymous chat thing is actually cool', sender: 'anon-b8e6f1', timestamp: Date.now() - 86_400_000 },
-    { id: 'm6', text: 'Yeah encrypted channels are the way. What brings you to NearClaw?', sender: '__SELF__', timestamp: Date.now() - 82_800_000 },
+    { id: 'm6', text: 'Yeah encrypted channels are the way. What brings you to UnMasked?', sender: '__SELF__', timestamp: Date.now() - 82_800_000 },
   ],
 }
 

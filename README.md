@@ -1,62 +1,87 @@
-# NearClaw
+# UnMasked
 
-Anonymous confessions and confidential matchmaking on NEAR Protocol.
+![UnMasked](./src/assets/near-dating.png)
 
-Users join themed confession pools to post anonymously through a relay server that strips identity before uploading to Nova TEE-encrypted storage. A separate matchmaking system lets users submit encrypted preferences and get paired with compatible people for private 1-on-1 chats.
+**Anonymous confessions & confidential matchmaking on NEAR Protocol.**
 
-## Architecture
+Live at [mintug.near.page](https://mintug.near.page)
 
-```
-Frontend (React)  -->  Relay Server (Express)  -->  Nova SDK (TEE + IPFS)
-     |                                                     |
-     +--- Wallet Selector (MyNearWallet, testnet) ---------+
-     |
-     +--- NEAR Social (profiles)
-```
+---
 
-- **Frontend** -- React 19, TypeScript, Vite, Tailwind CSS v4
-- **Relay Server** -- Express server that acts as the pool operator, strips sender identity from confessions before uploading
-- **Nova SDK** -- Handles TEE encryption, IPFS storage, and group-based access control on NEAR
-- **NEAR Social** -- User profiles stored on-chain via near-social-js
+## The Problem
 
-## Features
+Dating apps like Tinder, Bumble, and Hinge are bleeding users — down 10M+ and declining. They demand real identity upfront. Meanwhile, anonymous platforms like Pure, Whisper, and Secret are growing fast. But they're all centralized — they own your data, sell your secrets, and can be shut down overnight.
 
-- **Confession Pools** -- Themed anonymous confession feeds (crypto, dating, life, campus, work, general)
-- **Anonymous Posting** -- Relay server strips identity; confessions are uploaded by the operator account
-- **TEE Encryption** -- All data encrypted inside Trusted Execution Environments via Nova SDK
-- **Matchmaking** -- Submit encrypted preferences, get paired by compatibility score
-- **Encrypted Chat** -- 1-on-1 messaging between matched users through Nova group channels
-- **Data Sovereignty** -- Export your data as JSON or permanently delete your account from the protocol
-- **On-Chain Profiles** -- NEAR Social integration for display names and avatars
+No truly decentralized anonymous social platform exists. Until now.
 
-## Stack
+![The Problem](./src/assets/problem.png)
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 19, TypeScript, Vite 7, Tailwind CSS v4 |
-| Animation | Framer Motion |
-| Icons | Lucide React |
-| Routing | React Router v7 |
-| State | Zustand |
-| Wallet | NEAR Wallet Selector (MyNearWallet, Meteor, Here) |
-| Encryption | Nova SDK (TEE + IPFS) |
-| Profiles | near-social-js |
-| Relay Server | Express, Node.js |
-| Network | NEAR Testnet |
+---
 
-## Project Structure
+## Our Solution
 
-```
-near-hinged/
-  src/
-    components/    # UI components (Navigation, ConfessionCard, CreateConfessionModal)
-    pages/         # Route pages (Home, ConfessionFeed, PoolDetail, Matching, Matches, Chat, Profile, DataSovereignty)
-    providers/     # Context providers (WalletProvider, NovaProvider, SocialProvider)
-    store/         # Zustand stores (confessionStore, matchingStore)
-    config/        # Constants and configuration
-  server/
-    src/index.ts   # Express relay server
-```
+UnMasked is built on two pillars:
+
+**Anonymous Confessions** — Join themed pools (crypto, dating, campus, work, life). Write confessions that pass through a relay server which strips your identity before uploading. Pool members decrypt and read — nobody knows who wrote what.
+
+**Confidential Matchmaking** — Submit encrypted preferences into a TEE (Trusted Execution Environment). The enclave compares compatibility without exposing raw data. Matches unlock private, end-to-end encrypted chat channels.
+
+![How UnMasked Works](./src/assets/solution.png)
+
+---
+
+## Why NEAR?
+
+UnMasked can only exist on NEAR. Here's why:
+
+**Nova SDK + Shade Agent TEE** — This is the core. Every confession, every preference, every chat message is encrypted inside a Shade Agent running in a Trusted Execution Environment. The TEE terminates TLS inside the enclave — not even the cloud provider, not the operator, not NEAR itself can read the plaintext. Confessions are encrypted at rest on IPFS, and only pool members with TEE-issued keys can decrypt them. This is verified confidentiality, not a promise.
+
+**NEAR Account Model** — NEAR's named accounts (`alice.near`, `mintug.nova-sdk.near`) are what make our two-account anonymity model work. The user wallet and the operator account are separate named accounts that never interact on-chain. This separation is native to NEAR — no other chain gives you human-readable hierarchical accounts where a sub-account (`mintug.nova-sdk.near`) can act as an independent operator without revealing who triggered the action.
+
+**NEAR Social** — The `social.near` contract is a decentralized key-value store indexed by account ID. We use it for on-chain profiles — display names, avatars, bios — without any centralized database. Users own their identity data and can update or delete it directly on-chain. Combined with `near-social-js`, we tap into NEAR's existing social graph for real distribution.
+
+**Web4 + NEARFS** — The entire frontend is hosted on-chain via NEARFS at `mintug.near.page`. Zero centralized servers. The web4 contract handles SPA routing natively. If our team disappears tomorrow, the app keeps running.
+
+No other chain has Shade Agent TEEs, named accounts, an on-chain social layer, and decentralized frontend hosting as native primitives. NEAR has all four.
+
+![The NEAR Stack](./src/assets/why-near.png)
+
+---
+
+## Privacy by Default
+
+Anonymity isn't a setting you toggle on — it's the architecture. Confessions are anonymous because the relay strips identity and the TEE encrypts before storage. Matchmaking is confidential because raw preferences never leave the enclave. Users can inspect, export, and permanently delete all their data at any time.
+
+Every encryption operation runs inside a Shade Agent TEE with cryptographic attestation. This isn't "we promise not to look" — it's "we mathematically cannot look."
+
+---
+
+## Technical Architecture
+
+The core anonymity guarantee comes from account separation:
+
+- **User wallet** (`alice.near`) — connects in the app, joins pools, reads confessions.
+- **Operator account** (`mintug.nova-sdk.near`) — server-side only. Posts confessions on behalf of users.
+
+These two accounts never touch on-chain. When alice writes a confession, the relay strips her identity and uploads it as the operator. On NearBlocks, the transaction only shows the operator account. There is no link back to alice.
+
+![Confession Flow](./src/assets/technical-flow.png)
+
+---
+
+## User Walkthrough
+
+1. **Connect Wallet** — Sign in with your NEAR account via Meteor or MyNearWallet.
+2. **Choose** — Confessions or Matchmaking.
+3. **Confessions** — Pick a pool, write anonymously, read others' secrets.
+4. **Matchmaking** — Set preferences, TEE compares inside an enclave, get matched.
+5. **Chat** — Matched users communicate through encrypted Nova group channels.
+6. **Data Sovereignty** — Export your data as JSON or permanently delete your account.
+
+![User Walkthrough](./src/assets/user-flow.png)
+
+---
+
 
 ## Setup
 
@@ -64,60 +89,27 @@ near-hinged/
 
 - Node.js 18+
 - pnpm
-- A NEAR testnet wallet (create at https://testnet.mynearwallet.com)
-- A Nova SDK account (create at https://nova-sdk.dev)
 
 ### Environment Variables
 
-Frontend (`.env`):
-
 ```
 VITE_NOVA_API_KEY=<your-nova-api-key>
-VITE_RELAY_URL=http://localhost:3001
+VITE_NOVA_OPERATOR=<your-account>.nova-sdk.near
 VITE_MOCK_MODE=true
 ```
 
-Relay Server (`server/.env`):
+Set `MOCK_MODE=false` to use the real Nova SDK instead of the in-memory mock.
 
-```
-POOL_OPERATOR_ACCOUNT=<your-account>.nova-sdk-6.testnet
-NOVA_API_KEY=<your-nova-api-key>
-PORT=3001
-MOCK_MODE=true
-```
-
-Set `MOCK_MODE=false` to use the real Nova SDK instead of the in-memory mock store.
-
-### Install and Run
+### Run Locally
 
 ```bash
-# Frontend
-pnpm install
-pnpm dev
-
-# Relay server (separate terminal)
-cd server
 pnpm install
 pnpm dev
 ```
 
-Frontend runs on `http://localhost:5173`, relay server on `http://localhost:3001`.
+Runs on `http://localhost:5173`.
 
-## How It Works
-
-1. User connects their NEAR testnet wallet.
-2. User joins a confession pool. The relay server registers a Nova group and adds them as a member.
-3. User writes a confession. The relay server verifies membership, strips the sender identity, and uploads the encrypted confession as the operator account.
-4. Other pool members retrieve and decrypt confessions through Nova SDK.
-5. For matchmaking, users submit encrypted preferences which are compared inside TEEs to produce compatibility scores.
-6. Matched users communicate through encrypted Nova group channels.
-
-## Accounts
-
-Two types of NEAR accounts are involved:
-
-- **User wallet** (e.g. `yourname.testnet`) -- connects in the app, joins pools, browses confessions
-- **Operator account** (e.g. `yourname.nova-sdk-6.testnet`) -- server-side only, manages Nova groups and posts confessions anonymously
+---
 
 ## License
 

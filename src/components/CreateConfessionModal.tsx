@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { X, Send, Check } from 'lucide-react'
+import { Buffer } from 'buffer'
 import { useWallet } from '@/providers/WalletProvider'
+import { useNova } from '@/providers/NovaProvider'
 import { useConfessionStore } from '@/store/confessionStore'
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
 
 export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Props) {
   const { accountId } = useWallet()
+  const { sdk } = useNova()
   const addConfession = useConfessionStore((s) => s.addConfession)
   const [text, setText] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -20,12 +23,18 @@ export default function CreateConfessionModal({ poolId, onClose, onSuccess }: Pr
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!text.trim() || !accountId) return
+    if (!text.trim() || !accountId || !sdk) return
     setSubmitting(true)
     setError('')
 
     try {
-      await new Promise((r) => setTimeout(r, 500))
+      const confessionData = {
+        text: text.trim(),
+        timestamp: Date.now(),
+        reactions: { '❤️': 0, '🔥': 0, '🤔': 0, '👻': 0 },
+      }
+      const data = Buffer.from(JSON.stringify(confessionData))
+      await sdk.upload(poolId, data, 'confession.json')
       addConfession(poolId, text.trim())
       setSuccess(true)
       setTimeout(() => {

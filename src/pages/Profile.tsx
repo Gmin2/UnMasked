@@ -87,7 +87,7 @@ export default function Profile() {
             <Camera size={16} />
           </button>
         </div>
-        <h1 className="text-2xl font-bold mb-1 text-zinc-900">{displayName}</h1>
+        <h1 className="text-2xl font-bold mb-1 text-zinc-900 truncate max-w-full">{displayName}</h1>
         <div className="inline-block px-3 py-1 bg-brand-50 rounded-full text-[10px] font-mono font-bold text-brand-700 border border-brand-100">
           ID: {accountId.slice(0, 16)}
         </div>

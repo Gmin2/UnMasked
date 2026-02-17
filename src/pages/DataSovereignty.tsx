@@ -126,7 +126,7 @@ export default function DataSovereignty() {
 
       {/* Audit Trail */}
       <a
-        href={`https://testnet.nearblocks.io/address/${accountId}`}
+        href={`https://nearblocks.io/address/${accountId}`}
         target="_blank"
         rel="noopener noreferrer"
         className="block bg-zinc-100 text-zinc-900 p-8 rounded-[2.5rem] shadow-sm flex items-center justify-between group cursor-pointer border border-zinc-200 hover:shadow-md transition-shadow"

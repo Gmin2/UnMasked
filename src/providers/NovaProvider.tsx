@@ -33,9 +33,12 @@ export function NovaProvider({ children }: { children: ReactNode }) {
       })
     } else {
       import('nova-sdk-js').then(({ NovaSdk }) => {
-        const instance = new NovaSdk(accountId, {
+        const operator = import.meta.env.VITE_NOVA_OPERATOR || accountId
+        const isDev = import.meta.env.DEV
+        const instance = new NovaSdk(operator, {
           contractId: NOVA_CONFIG.contractId,
-          mcpUrl: NOVA_CONFIG.mcpUrl,
+          mcpUrl: isDev ? '/nova-mcp' : NOVA_CONFIG.mcpUrl,
+          authUrl: isDev ? '/nova-auth' : 'https://nova-auth-proxy.mintugogoi567.workers.dev',
           rpcUrl: NOVA_CONFIG.rpcUrl,
           apiKey: import.meta.env.VITE_NOVA_API_KEY || undefined,
         })
