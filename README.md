@@ -4,7 +4,7 @@
 
 **Anonymous confessions & confidential matchmaking on NEAR Protocol.**
 
-Live at [mintug.near.page](https://mintug.near.page)
+Live at [mintug.near.page](https://mintug.near.page) (deployed on mainnet)
 
 ---
 
